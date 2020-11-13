@@ -15,7 +15,8 @@ ABC = 2*A*B + 3*C
 % [OPTATIVO] Realizar una operacion que implique matrices no cuadradas, y que genere como resultado una matriz de 5x5
 M1 = [2.0 -5.0; -4.0 3.0; 3.0 3.0; -4.0 -8.0; 7.0 9.0];
 M2 = [5.0 6.0 -9.0 6.0 4.0; -3.0 -6.0 -5.0 7.0 2.0];
-%M3 =  [-2.0 3.0; 5.0 -5.0];
+M3 = [-2.0 3.0 -5.0 -5.0 3.0; -2.0 7.0 6.0 -5.0 0.0; -2.0 5.0 -5.0 8.0 7.0; 
+      -1.0 9.0 -5.0 -6.0 2.0; -1.0 0.0 3.0 5.0 -3.0];
 
-% 2*M3*M2 + 4*M1
-opt = 2*M1*3*M2
+% 2*M1*3*M2 - 6*M3
+opt = 2*M1*3*M2 - 6*M3
