@@ -32,18 +32,18 @@ end
 
 %{
 Matlab recorre por filas, por lo que en el primer
-ejercicio se experimentÛ con la matriz no transpuesta
+ejercicio se experiment√≥ con la matriz no transpuesta
 y por filas.
-Por tanto, si se transpone la matriz, y adem·s se 
-recorre por columnas, se estarÌa realizando la misma
-operaciÛn que en el primer apartado.
-AsÌ que lo que se realizar· en este ejercicio ser·
+Por tanto, si se transpone la matriz, y adem√°s se 
+recorre por columnas, se estar√≠a realizando la misma
+operaci√≥n que en el primer apartado.
+As√≠ que lo que se realizar√° en este ejercicio ser√°
 transponer la matriz y recorrer por filas, con lo que
 se obtiene nuevos valores que coinciden con los obtenidos
-en CBLAS. Adem·s, si la matriz no es transpuesta pero se
+en CBLAS. Adem√°s, si la matriz no es transpuesta pero se
 recorre por columnas, entonces se obtiene el mismo 
 resultado que la prueba anterior.
-AsÌ que basta con transponer la matriz para cubrir 
+As√≠ que basta con transponer la matriz para cubrir 
 dos de las cuatros posibilidades. Mientras las otras
 dos ya han sido cubiertas en el apartado anterior.
 %}
