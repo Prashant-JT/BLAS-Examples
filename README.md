@@ -1,6 +1,6 @@
 # MNC_BLAS
 
-Practica 2: ![Práctica en Matlab](Practica 2/MATLAB/p2.m) | ![Práctica en C++](https://github.com/Prashant-JT/MNC_BLAS/tree/master/p2)
+Practica 2: ![Práctica en Matlab](https://github.com/Prashant-JT/MNC_BLAS/tree/master/Practica%202/MATLAB) | ![Práctica en C++](https://github.com/Prashant-JT/MNC_BLAS/tree/master/p2)
 
 Practica 3: ![Práctica en Matlab](p3.m) | ![Práctica en C++](https://github.com/Prashant-JT/MNC_BLAS/tree/master/p3)
 
