@@ -1,0 +1,6 @@
+﻿  p5.cpp
+C:\Users\remoto\Downloads\MNC_BLAS-master\MNC_BLAS-master\Practica 5\C++\p5\p5\p5.cpp(25,48): warning C4244: 'argumento': conversión de 'double' a 'size_t'; posible pérdida de datos
+C:\Users\remoto\Downloads\MNC_BLAS-master\MNC_BLAS-master\Practica 5\C++\p5\p5\p5.cpp(40,45): warning C4244: 'argumento': conversión de 'float' a 'size_t'; posible pérdida de datos
+C:\Users\remoto\Downloads\MNC_BLAS-master\MNC_BLAS-master\Practica 5\C++\p5\p5\p5.cpp(195,72): warning C4244: 'argumento': conversión de 'int' a 'const float'; posible pérdida de datos
+C:\Users\remoto\Downloads\MNC_BLAS-master\MNC_BLAS-master\Practica 5\C++\p5\p5\p5.cpp(195,49): warning C4244: 'argumento': conversión de 'int' a 'const float'; posible pérdida de datos
+  p5.vcxproj -> C:\Users\remoto\Downloads\MNC_BLAS-master\MNC_BLAS-master\Practica 5\C++\p5\x64\Debug\p5.exe
