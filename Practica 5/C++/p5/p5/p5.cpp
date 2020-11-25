@@ -76,11 +76,11 @@ double* funcion2() {
 	alpha = 1;
 	beta = 0;
 
-	clock_t start, fin;
+	double start, fin = dsecnd();
 	double* totalTime = new double[1000/20];
 	int p = 0;
 	// crea matrices 
-	for (int i = 2; i <= 1002; i+=20) {
+	for (int i = 20; i <= 1000; i+=20) {
 		m = i;
 		k = i;
 		n = i;
@@ -92,16 +92,16 @@ double* funcion2() {
 		double* C = generateMatrixDouble(i, i);
 
 
-		start = clock();
+		start = dsecnd();
 		// operacion x100
 		for (int j = 0; j < 100; j++) {
 			cblas_dgemm(layout, transA, transB, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
 		}
-		fin = clock();
-		totalTime[p] = (fin - start) / (float)CLOCKS_PER_SEC;		
+		fin = (dsecnd() - start);
+		totalTime[p] = (100/fin)/1e9;		
 
 		printf("Tiempo de ejecucion: ");
-		printf("%f para %d x %d \n", totalTime[p]/100, m,n);
+		printf("%4.8f para %d x %d \n", totalTime[p], m,n);
 		//printMatrix(B, m, n);
 		//printf("\n");
 
@@ -124,11 +124,11 @@ double* funcion3() {
 	alpha = 1;
 	beta = 0;
 
-	clock_t start, fin;
+	double start, fin = dsecnd();
 	double* totalTime = new double[1000 / 20];
 	int p = 0;
 	// crea matrices 
-	for (int i = 2; i <= 1002; i += 20) {
+	for (int i = 20; i <= 1000; i += 20) {
 		m = i;
 		k = i;
 		n = i;
@@ -140,16 +140,16 @@ double* funcion3() {
 		double* C = generateMatrixDouble(i, i);
 
 
-		start = clock();
+		start = dsecnd();
 		// operacion x100
 		for (int j = 0; j < 100; j++) {
 			cblas_dgemm(layout, transA, transB, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
 		}
-		fin = clock();
-		totalTime[p] = (fin - start) / (float)CLOCKS_PER_SEC;
+		fin = (dsecnd() - start);
+		totalTime[p] = (100 / fin) / 1e9;
 
 		printf("Tiempo de ejecucion: ");
-		printf("%f para %d x %d \n", totalTime[p] / 100, m, n);
+		printf("%4.8f para %d x %d \n", totalTime[p], m, n);
 		//printMatrix(B, m, n);
 		//printf("\n");
 
@@ -172,12 +172,12 @@ double* funcion4() {
 	alpha = 1;
 	beta = 0;
 
-	clock_t start, fin;
+	double start, fin = dsecnd();
 	double* totalTime = new double[1000/20];
 	int p = 0;
 
 	// crea matrices 
-	for (int i = 2; i <= 1002; i+=20) {
+	for (int i = 20; i <= 1000; i+=20) {
 		m = i;
 		k = i;
 		n = i;
@@ -189,16 +189,16 @@ double* funcion4() {
 		float* C = generateMatrixFloat(i, i);
 
 
-		start = clock();
+		start = dsecnd();
 		// operacion x100
 		for (int j = 0; j < 100; j++) {
 			cblas_sgemm(layout, transA, transB, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
 		}
-		fin = clock();
-		totalTime[p] = (fin - start) / (float)CLOCKS_PER_SEC;		
+		fin = (dsecnd() - start);
+		totalTime[p] = (100 / fin) / 1e9;
 
 		printf("Tiempo de ejecucion: ");
-		printf("%f para %d x %d \n", totalTime[p] / 100, m, n);
+		printf("%4.8f para %d x %d \n", totalTime[p], m, n);
 		//printMatrix(B, m, n);
 		//printf("\n");
 
@@ -225,6 +225,53 @@ void saveFile(int size, double* vect, string name) {
 	}
 }
 
+double* funcion5() {
+	MKL_INT m, k, n, alpha, beta, lda, ldb, ldc;
+	CBLAS_LAYOUT layout;
+	CBLAS_TRANSPOSE transA;
+	CBLAS_TRANSPOSE transB;
+	layout = CblasRowMajor;
+	transA = CblasNoTrans;
+	transB = CblasNoTrans;
+	alpha = 1;
+	beta = 0;
+
+	double start, fin = dsecnd();
+	double* totalTime = new double[1000 / 20];
+	int p = 0;
+	// crea matrices 
+	for (int i = 20; i <= 1000; i += 20) {
+		m = i;
+		k = i;
+		n = i;
+		lda = k;
+		ldb = n;
+		ldc = n;
+		double* A = generateMatrixDouble(i, i);
+		double* B = generateMatrixDouble(i, i);
+		double* C = generateMatrixDouble(i, i);
+
+
+		start = dsecnd();
+		// operacion x100
+		for (int j = 0; j < 100; j++) {
+			cblas_dgemm(layout, transA, transB, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
+		}
+		totalTime[p] = (dsecnd() - start) / 100;
+
+		printf("Tiempo de ejecucion: ");
+		printf("%4.8f para %d x %d \n", totalTime[p], m, n);
+		//printMatrix(B, m, n);
+		//printf("\n");
+
+		mkl_free(A);
+		mkl_free(B);
+		mkl_free(C);
+		p++;
+	}
+	return totalTime;
+}
+
 int main(int argc, char* argv[]) {
 	srand((unsigned int)time(NULL));
 	/*
@@ -235,13 +282,19 @@ int main(int argc, char* argv[]) {
 	double* timeDouble = funcion2();
 	saveFile(1000/20, timeDouble, "Ejercicio2.csv");
 	*/
+	
 	printf("Ejercicio 3:\n");
 	double* timeDoubleParallel = funcion3();
 	saveFile(1000/20, timeDoubleParallel, "Ejercicio3.csv");
+	
 	/*
 	printf("Ejercicio 4:\n");
 	double* timeFloat = funcion4();
 	saveFile(1000/20, timeFloat, "Ejercicio4.csv");
+	
+	printf("Ejercicio 5:\n");
+	double* timeDoubleMean = funcion5();
+	saveFile(1000 / 20, timeDoubleMean, "Ejercicio5.csv");
 	*/
 	char a = std::getchar();
 	return 0;
