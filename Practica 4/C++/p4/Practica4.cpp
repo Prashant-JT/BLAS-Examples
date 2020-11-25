@@ -42,7 +42,7 @@ void funcion1() {
 	double C1[9] = { 8.0, 9.0, -7.0, 17.0, -3.0, 8.0, -1.0, 4.0, 1.0 };
 	transB = CblasTrans;
 
-	printf("\tCalculo de A*B':\n\t\t");
+	printf("\tCalculo de A*Bt':\n\t\t");
 	cblas_dgemm(layout, transA, transB, m, n, k, alpha, A, lda, B, ldb, beta, C1, ldc);
 	printMatrix(C1, m*n, n);
 
