@@ -22,7 +22,7 @@ void printMatrix(double* mat, int m, int n) {
 }
 
 double* generateMatrixDouble(int m, int n) {
-	double *X = (double*)mkl_malloc((double)(m*n) * sizeof(double), 64);
+	double *X = (double*)mkl_malloc((double)m*(double)n * sizeof(double), 64);
 
 	if (X == NULL) { 
 		perror("Error malloc"); 
@@ -37,7 +37,7 @@ double* generateMatrixDouble(int m, int n) {
 }
 
 float* generateMatrixFloat(int m, int n) {
-	float* X = (float*)mkl_malloc((float)(m*n) * sizeof(float), 32);
+	float* X = (float*)mkl_malloc((float)m*(float)n * sizeof(float), 32);
 
 	if (X == NULL) {
 		perror("Error malloc");
@@ -77,10 +77,10 @@ double* funcion2() {
 	beta = 0;
 
 	double start, fin = dsecnd();
-	double* totalTime = new double[1000/20];
+	double* totalTime = new double[46];
 	int p = 0;
 	// crea matrices 
-	for (int i = 20; i <= 1000; i+=20) {
+	for (int i = 100; i <= 1000; i+=20) {
 		m = i;
 		k = i;
 		n = i;
@@ -93,12 +93,11 @@ double* funcion2() {
 
 
 		start = dsecnd();
-		// operacion x100
 		for (int j = 0; j < 100; j++) {
 			cblas_dgemm(layout, transA, transB, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
 		}
 		fin = (dsecnd() - start);
-		totalTime[p] = (100/fin)/1e9;		
+		totalTime[p] = (100 / fin) / 1e9;
 
 		printf("Tiempo de ejecucion: ");
 		printf("%4.8f para %d x %d \n", totalTime[p], m,n);
@@ -125,10 +124,10 @@ double* funcion3() {
 	beta = 0;
 
 	double start, fin = dsecnd();
-	double* totalTime = new double[1000 / 20];
+	double* totalTime = new double[46];
 	int p = 0;
 	// crea matrices 
-	for (int i = 20; i <= 1000; i += 20) {
+	for (int i = 100; i <= 1000; i += 20) {
 		m = i;
 		k = i;
 		n = i;
@@ -173,11 +172,11 @@ double* funcion4() {
 	beta = 0;
 
 	double start, fin = dsecnd();
-	double* totalTime = new double[1000/20];
+	double* totalTime = new double[46];
 	int p = 0;
 
 	// crea matrices 
-	for (int i = 20; i <= 1000; i+=20) {
+	for (int i = 100; i <= 1000; i+=20) {
 		m = i;
 		k = i;
 		n = i;
@@ -237,10 +236,10 @@ double* funcion5() {
 	beta = 0;
 
 	double start, fin = dsecnd();
-	double* totalTime = new double[1000 / 20];
+	double* totalTime = new double[46];
 	int p = 0;
 	// crea matrices 
-	for (int i = 20; i <= 1000; i += 20) {
+	for (int i = 100; i <= 1000; i += 20) {
 		m = i;
 		k = i;
 		n = i;
@@ -274,28 +273,35 @@ double* funcion5() {
 
 int main(int argc, char* argv[]) {
 	srand((unsigned int)time(NULL));
-	/*
-	printf("Ejercicio 1:\n");	
-	funcion1();
+
+	bool para = false;
+
+	if (para) {
+		printf("Ejercicio 3:\n");
+		double* timeDoubleParallel = funcion3();
+		saveFile(46, timeDoubleParallel, "Ejercicio3.csv");
+
+		printf("Ejercicio 4:\n");
+		double* timeFloatParallel = funcion4();
+		saveFile(46, timeFloatParallel, "Ejercicio4Para.csv");
+
+	} else {
+		printf("Ejercicio 1:\n");
+		funcion1();
+
+		printf("Ejercicio 2:\n");
+		double* timeDouble = funcion2();
+		saveFile(46, timeDouble, "Ejercicio2.csv");
+
+		printf("Ejercicio 4:\n");
+		double* timeFloat = funcion4();
+		saveFile(46, timeFloat, "Ejercicio4Seq.csv");
+		
+		printf("Ejercicio 5:\n");
+		double* timeDoubleMean = funcion5();
+		saveFile(46, timeDoubleMean, "Ejercicio5CPP.csv");
+	}
 	
-	printf("Ejercicio 2:\n");
-	double* timeDouble = funcion2();
-	saveFile(1000/20, timeDouble, "Ejercicio2.csv");
-	*/
-	
-	printf("Ejercicio 3:\n");
-	double* timeDoubleParallel = funcion3();
-	saveFile(1000/20, timeDoubleParallel, "Ejercicio3.csv");
-	
-	/*
-	printf("Ejercicio 4:\n");
-	double* timeFloat = funcion4();
-	saveFile(1000/20, timeFloat, "Ejercicio4.csv");
-	
-	printf("Ejercicio 5:\n");
-	double* timeDoubleMean = funcion5();
-	saveFile(1000 / 20, timeDoubleMean, "Ejercicio5.csv");
-	*/
 	char a = std::getchar();
 	return 0;
 }
