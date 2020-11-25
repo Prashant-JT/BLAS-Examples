@@ -1,10 +1,11 @@
 clear; clc;
 
 %first();
-second();
+%second();
+fifth();
 
 function X = randomMatrix(m, n)
-    X = rand(m,n);
+    X = double(rand(m,n));
 end
 
 function first()
@@ -35,4 +36,26 @@ function second()
         opTimes(i) = toc/nOps;
         fprintf("El tiempo para [%dX%d] es: %4.6f s.\n", i, i, opTimes(i));
     end
+end
+
+function fifth()
+    max = 1000;
+    min = 100;
+    jump = 20;
+    nOps = 100;
+    opTimes = zeros(1, 45);
+    cont = 1;
+    disp("Quinto ejercicio");
+    disp(" ");
+    
+    for i = min:jump:max
+        tic;
+        for j = 1:nOps
+            res = randomMatrix(i, i)*randomMatrix(i, i);
+        end
+        opTimes(cont) = toc/nOps;
+        % fprintf("El tiempo para [%dX%d] es: %4.6f s.\n", i, i, opTimes(cont));
+        cont = cont +1;
+    end
+    csvwrite('Ejercicio5ML.csv', opTimes);
 end
